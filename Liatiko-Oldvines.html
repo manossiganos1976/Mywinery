@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Liatiko Rose - Wine-Elabels.eu</title>
+<style>
+  body {
+    font-family: sans-serif;
+    margin: 2em;
+  }
+  header, main {
+    max-width: 800px;
+    margin: auto;
+  }
+  select {
+    margin-bottom: 1em;
+    font-size: 1rem;
+    padding: 0.3em;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1em;
+  }
+  th, td {
+    padding: 0.5em;
+    border: 1px solid #ccc;
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>Iliana Malihin winery</h1>
+  <select id="language-select" aria-label="Select language">
+    <option value="en" selected>English</option>
+    <option value="fr">Français</option>
+    <option value="de">Deutsch</option>
+    <option value="it">Italiano</option>
+    <option value="el">Ελληνικά</option>
+    <option value="es">Español</option>
+    <option value="nl">Nederlands</option>
+  </select>
+</header>
+
+<main>
+  <h2 id="wine-name"></h2>
+
+  <section>
+    <h2 id="nutrition-title">NUTRITION DECLARATION</h2>
+    <table>
+      <thead>
+        <tr>
+          <th colspan="2" id="nutrition-header">Average Nutritional Values per 100 ml Serving Size</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td id="energy-label">ENERGY</td><td id="energy-value"></td></tr>
+        <tr><td id="fat-label">FAT</td><td id="fat-value"></td></tr>
+        <tr><td id="saturates-label">OF WHICH SATURATES</td><td id="saturates-value"></td></tr>
+        <tr><td id="carbohydrates-label">CARBOHYDRATES</td><td id="carbohydrates-value"></td></tr>
+        <tr><td id="sugars-label">OF WHICH SUGARS</td><td id="sugars-value"></td></tr>
+        <tr><td id="protein-label">PROTEIN</td><td id="protein-value"></td></tr>
+        <tr><td id="salt-label">SALT</td><td id="salt-value"></td></tr>
+      </tbody>
+    </table>
+  </section>
+</main>
+
+<script>
+const wineName = "Liatiko Rose"; // Άλλαζε χειροκίνητα εδώ
+
+const nutritionValues = {
+  energy: "339 kJ / 81 kcal",
+  fat: "0 g",
+  saturates: "0 g",
+  carbohydrates: "1.8 g",
+  sugars: "0.15 g",
+  protein: "0.02 g",
+  salt: "0.01 g"
+};
+
+const translations = {
+  en: {
+    "nutrition-title": "NUTRITION DECLARATION",
+    "nutrition-header": "Average Nutritional Values per 100 ml Serving Size",
+    "energy-label": "ENERGY",
+    "fat-label": "FAT",
+    "saturates-label": "OF WHICH SATURATES",
+    "carbohydrates-label": "CARBOHYDRATES",
+    "sugars-label": "OF WHICH SUGARS",
+    "protein-label": "PROTEIN",
+    "salt-label": "SALT"
+  },
+  fr: {
+    "nutrition-title": "DÉCLARATION NUTRITIONNELLE",
+    "nutrition-header": "Valeurs nutritionnelles moyennes pour 100 ml",
+    "energy-label": "ÉNERGIE",
+    "fat-label": "MATIÈRES GRASSES",
+    "saturates-label": "DONT ACIDES GRAS SATURÉS",
+    "carbohydrates-label": "GLUCIDES",
+    "sugars-label": "DONT SUCRES",
+    "protein-label": "PROTÉINES",
+    "salt-label": "SEL"
+  },
+  de: {
+    "nutrition-title": "ERNÄHRUNGSERKLÄRUNG",
+    "nutrition-header": "Durchschnittliche Nährwerte pro 100 ml",
+    "energy-label": "ENERGIE",
+    "fat-label": "FETT",
+    "saturates-label": "DAVON GESÄTTIGTE FETTSÄUREN",
+    "carbohydrates-label": "KOHLENHYDRATE",
+    "sugars-label": "DAVON ZUCKER",
+    "protein-label": "EIWEIß",
+    "salt-label": "SALZ"
+  },
+  it: {
+    "nutrition-title": "DICHIARAZIONE NUTRIZIONALE",
+    "nutrition-header": "Valori nutrizionali medi per 100 ml",
+    "energy-label": "ENERGIA",
+    "fat-label": "GRASSI",
+    "saturates-label": "DI CUI SATURI",
+    "carbohydrates-label": "CARBOIDRATI",
+    "sugars-label": "DI CUI ZUCCHERI",
+    "protein-label": "PROTEINE",
+    "salt-label": "SALE"
+  },
+  el: {
+    "nutrition-title": "ΔΗΛΩΣΗ ΔΙΑΤΡΟΦΙΚΩΝ ΣΤΟΙΧΕΙΩΝ",
+    "nutrition-header": "Μέσες Διατροφικές Αξίες ανά 100 ml",
+    "energy-label": "ΕΝΕΡΓΕΙΑ",
+    "fat-label": "ΛΙΠΑΡΑ",
+    "saturates-label": "ΕΚ ΤΩΝ ΟΠΟΙΩΝ ΚΟΡΕΣΜΕΝΑ",
+    "carbohydrates-label": "ΥΔΑΤΑΝΘΡΑΚΕΣ",
+    "sugars-label": "ΕΚ ΤΩΝ ΟΠΟΙΩΝ ΖΑΧΑΡΕΣ",
+    "protein-label": "ΠΡΩΤΕΪΝΕΣ",
+    "salt-label": "ΑΛΑΤΙ"
+  },
+  es: {
+    "nutrition-title": "DECLARACIÓN NUTRICIONAL",
+    "nutrition-header": "Valores nutricionales promedio por 100 ml",
+    "energy-label": "ENERGÍA",
+    "fat-label": "GRASA",
+    "saturates-label": "DE LOS CUALES SATURADAS",
+    "carbohydrates-label": "CARBOHIDRATOS",
+    "sugars-label": "DE LOS CUALES AZÚCARES",
+    "protein-label": "PROTEÍNAS",
+    "salt-label": "SAL"
+  },
+  nl: {
+    "nutrition-title": "VOEDINGSWAARDES",
+    "nutrition-header": "Gemiddelde voedingswaarden per 100 ml",
+    "energy-label": "ENERGIE",
+    "fat-label": "VET",
+    "saturates-label": "DAARVAN VERZADIGD",
+    "carbohydrates-label": "KOOLHYDRATEN",
+    "sugars-label": "DAARVAN SUIKERS",
+    "protein-label": "EIWITTEN",
+    "salt-label": "ZOUT"
+  }
+};
+
+function updateNutritionValues() {
+  document.getElementById("energy-value").textContent = nutritionValues.energy;
+  document.getElementById("fat-value").textContent = nutritionValues.fat;
+  document.getElementById("saturates-value").textContent = nutritionValues.saturates;
+  document.getElementById("carbohydrates-value").textContent = nutritionValues.carbohydrates;
+  document.getElementById("sugars-value").textContent = nutritionValues.sugars;
+  document.getElementById("protein-value").textContent = nutritionValues.protein;
+  document.getElementById("salt-value").textContent = nutritionValues.salt;
+}
+
+document.getElementById('language-select').addEventListener('change', function() {
+  const lang = this.value;
+  const dict = translations[lang];
+  for (const id in dict) {
+    const el = document.getElementById(id);
+    if (el) el.textContent = dict[id];
+  }
+  document.getElementById("wine-name").textContent = wineName;
+  updateNutritionValues();
+});
+
+// Αρχική ρύθμιση
+document.getElementById('language-select').dispatchEvent(new Event('change'));
+</script>
+</body>
+</html>
